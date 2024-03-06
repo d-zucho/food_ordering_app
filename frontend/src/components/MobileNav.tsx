@@ -1,14 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 
 import {
   Sheet,
