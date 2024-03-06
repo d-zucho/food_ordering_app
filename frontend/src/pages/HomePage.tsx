@@ -1,3 +1,4 @@
+import Details from '@/components/Details'
 import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
 
@@ -26,6 +27,7 @@ const HomePage = () => {
           </Button>
         </div>
       </div>
+      <Details />
     </div>
   )
 }
