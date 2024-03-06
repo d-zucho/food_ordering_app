@@ -1,5 +1,15 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+
 import {
   Sheet,
   SheetContent,
@@ -8,9 +18,11 @@ import {
   SheetTrigger,
 } from './ui/sheet'
 
-import { Menu } from 'lucide-react'
+import { CircleUserRound, Menu } from 'lucide-react'
+import MobileNavLinks from './MobileNavLinks'
 
 const MobileNav = () => {
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0()
   return (
     <Sheet>
       <SheetTrigger>
@@ -18,13 +30,27 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent>
         <SheetTitle className='mb-8'>
-          <span>Welcome to MernEats.com</span>
+          {isAuthenticated ? (
+            <span className='flex items-center font-bold gap-2'>
+              <CircleUserRound className='text-orange-500' />
+              {user?.name}
+            </span>
+          ) : (
+            <span>Welcome to MernEats.com</span>
+          )}
         </SheetTitle>
         <Separator />
-        <SheetDescription className='flex'>
-          <Button className='flex-1 font-bold bg-orange-500 hover:bg-orange-400'>
-            Log in
-          </Button>
+        <SheetDescription className='flex flex-col gap-4 mt-4 items-center'>
+          {isAuthenticated ? (
+            <MobileNavLinks />
+          ) : (
+            <Button
+              className='flex-1 font-bold bg-orange-500 hover:bg-orange-400'
+              onClick={() => loginWithRedirect()}
+            >
+              Log in
+            </Button>
+          )}
         </SheetDescription>
       </SheetContent>
     </Sheet>
